@@ -1,0 +1,26 @@
+{
+  "name": "tiktok-api",
+  "version": "1.0.0",
+  "description": "Brkfst-made API for TikTok",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/* --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ssh.dev.azure.com:v3/agencywithin/AWPL/tiktok-api"
+  },
+  "keywords": [
+    "TikTok"
+  ],
+  "author": "Brkfst",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.9",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {}
+}
