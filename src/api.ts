@@ -1,4 +1,6 @@
 export default class TikTokApi {
+  static defaultApi: TikTokApi;
+
   static get VERSION(): string {
     return process.env.TIKTOK_VERSION || "v1.3";
   }
@@ -10,7 +12,9 @@ export default class TikTokApi {
   constructor(
     private accessToken: string | null = null,
     private debug: boolean = false
-  ) {}
+  ) {
+    TikTokApi.defaultApi = this;
+  }
 
   public async call(
     method: "POST" | "PUT" | "GET" | "PATCH" | "DELETE",

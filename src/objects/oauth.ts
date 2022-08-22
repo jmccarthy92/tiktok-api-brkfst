@@ -11,6 +11,10 @@ export default class TikTokAuth extends TikTokObject {
   }
 
   getAccessToken(appSecret: string, appId: string, authCode: string) {
-    return this.post("oauth2/access_token");
+    return this.post(`${TikTokAuth.ENDPOINT}/access_token`, {
+        app_id: appId,
+        auth_code: authCode,
+        secret: appSecret,
+    });
   }
 }
