@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 export default class TikTokApi {
   static defaultApi: TikTokApi;
 
@@ -20,29 +22,38 @@ export default class TikTokApi {
     method: "POST" | "PUT" | "GET" | "PATCH" | "DELETE",
     path: string,
     body: Record<string, any> = {},
-    params: Record<string, any> = {}
+    params: Record<string, any> = {},
+    headers: Record<string, any> = {
+      "Content-Type": "application/json",
+    }
   ) {
-    let url = `${TikTokApi.API}/${path}`;
-    const urlParams = new URLSearchParams(params);
-    if (urlParams) url += `?=${urlParams}`;
+    const reqParams = { ...params };
+    if (this.accessToken) {
+      reqParams.access_token = this.accessToken;
+      headers["Access-Token"] = this.accessToken;
+    }
 
-    const headers: HeadersInit = { "Content-Type": "application/json" };
-    if (this.accessToken) headers["Access-Token"] = this.accessToken;
-
+    const url = this.formatUrl(path, reqParams);
     try {
       const response = await fetch(url, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
+        headers,
+        body: Object.keys(body).length ? JSON.stringify(body) : undefined,
       });
-      if (this.debug) this.logResponse(method, url, body, response);
-      return response;
+      const jsonResponse = await response.json();
+      if (this.debug) this.logResponse(method, url, body, jsonResponse);
+      return jsonResponse;
     } catch (error) {
       if (this.debug) this.logError(method, url, body, error);
       throw error;
     }
+  }
+
+  private formatUrl(path: string, params: Record<string, any>) {
+    let url = `${TikTokApi.API}/${path}/`;
+    const urlParams = new URLSearchParams(params).toString();
+    if (urlParams) url += `?${urlParams}`;
+    return url;
   }
 
   private logResponse(

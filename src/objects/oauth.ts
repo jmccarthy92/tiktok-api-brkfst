@@ -1,20 +1,26 @@
-import TikTokApi from "api";
-import TikTokObject from "object";
+import TikTokObject from "../object";
 
 export default class TikTokAuth extends TikTokObject {
   static get ENDPOINT() {
     return "oauth2";
   }
 
-  constructor(protected api: TikTokApi) {
-    super(api);
+  public getAuthorizedAdAccounts(secret: string, appId: string) {
+    return this.get(this.formatEndpoint("advertiser/get"), {
+      app_id: appId,
+      secret,
+    });
   }
 
-  createAccessToken(appSecret: string, appId: string, authCode: string) {
-    return this.post(`${TikTokAuth.ENDPOINT}/access_token`, {
+  public createAccessToken(secret: string, appId: string, authCode: string) {
+    return this.post(this.formatEndpoint("access_token"), {
       app_id: appId,
       auth_code: authCode,
-      secret: appSecret,
+      secret,
     });
+  }
+
+  private formatEndpoint(endpoint: string) {
+    return `${TikTokAuth.ENDPOINT}/${endpoint}`;
   }
 }
