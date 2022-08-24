@@ -1,9 +1,9 @@
 {
   "name": "tiktok-api-brkfst",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Brkfst-made API for TikTok",
-  "main": "build/api.js",
-  "types": "build/api.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
