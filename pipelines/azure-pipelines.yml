@@ -1,0 +1,20 @@
+trigger:
+  - main
+pool:
+  name: Azure Pipelines
+steps:
+  - task: NodeTool@0
+    displayName: "Use Node 16"
+    inputs:
+      versionSpec: 16.9.1
+
+  - script: |
+      npm ci
+      npm run build
+    displayName: "npm install, build"
+
+  - task: Npm@1
+    inputs:
+      command: publish
+      publishRegistry: useExternalRegistry
+      publishEndpoint: npm-tiktok
