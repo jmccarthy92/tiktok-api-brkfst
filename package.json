@@ -2,10 +2,14 @@
   "name": "tiktok-api",
   "version": "1.0.0",
   "description": "Brkfst-made API for TikTok",
-  "main": "index.js",
+  "main": "build/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/**/* --ext .ts"
+    "build": "tsc",
+    "prepare": "npm run build",
+    "lint": "eslint src/**/* --ext .ts",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -14,6 +18,9 @@
   "keywords": [
     "TikTok"
   ],
+  "files": [
+    "build/**/*"
+  ],
   "author": "Brkfst",
   "license": "ISC",
   "devDependencies": {
@@ -21,6 +28,7 @@
     "@types/node-fetch": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
     "typescript": "^4.7.4"
   },
   "dependencies": {
