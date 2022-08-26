@@ -1,3 +1,5 @@
+import { ReadStream } from "fs";
+
 export interface TikTokResponse<Data = any> {
   message: string;
   code: number;
@@ -23,7 +25,7 @@ export interface TikTokAccessTokenResponse {
 export interface UploadVideoRequest {
   advertiser_id: string;
   upload_type: UploadType;
-  video_file: string;
+  video_file: string | ReadStream;
   video_signature: string;
   is_third_party?: boolean;
   flaw_detect?: boolean;
