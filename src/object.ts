@@ -1,3 +1,4 @@
+import FormData from "form-data";
 import TikTokApi from "./api";
 
 export default class TikTokObject {

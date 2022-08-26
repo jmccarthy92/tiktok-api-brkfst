@@ -33,6 +33,15 @@ export interface UploadVideoRequest {
   auto_bind_enabled?: boolean;
 }
 
+export type UploadVideoFileRequest = Pick<
+  UploadVideoRequest,
+  | "advertiser_id"
+  | "is_third_party"
+  | "flaw_detect"
+  | "auto_bind_enabled"
+  | "auto_fix_enabled"
+>;
+
 export enum UploadType {
   UPLOAD_BY_FILE = "UPLOAD_BY_FILE",
   UPLOAD_BY_URL = "UPLOAD_BY_URL",

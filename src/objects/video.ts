@@ -5,6 +5,7 @@ import {
   TikTokAuthorizedAccountResponse,
   TikTokResponse,
   UploadType,
+  UploadVideoFileRequest,
   UploadVideoRequest,
 } from "./types";
 
@@ -15,7 +16,7 @@ export default class TikTokVideo extends TikTokObject {
 
   public async uploadVideoByFile(
     filePath: string,
-    request: Exclude<UploadVideoRequest, "video_file" | "upload_type">
+    request: UploadVideoFileRequest
   ): Promise<TikTokResponse<TikTokAuthorizedAccountResponse>> {
     const { hash, stream } = await this.prepareFile(filePath);
     return this.uploadVideo({
