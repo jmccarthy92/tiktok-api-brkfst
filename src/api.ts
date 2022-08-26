@@ -18,7 +18,7 @@ export default class TikTokApi {
     TikTokApi.defaultApi = this;
   }
 
-  public async call(
+  public async call<T = any>(
     method: "POST" | "PUT" | "GET" | "PATCH" | "DELETE",
     path: string,
     body: Record<string, any> = {},
@@ -26,7 +26,7 @@ export default class TikTokApi {
     headers: Record<string, any> = {
       "Content-Type": "application/json",
     }
-  ) {
+  ): Promise<T> {
     const reqParams = { ...params };
     if (this.accessToken) {
       reqParams.access_token = this.accessToken;
@@ -49,7 +49,7 @@ export default class TikTokApi {
     }
   }
 
-  private formatUrl(path: string, params: Record<string, any>) {
+  private formatUrl(path: string, params: Record<string, any>): string {
     let url = `${TikTokApi.API}/${path}/`;
     const urlParams = new URLSearchParams(params).toString();
     if (urlParams) url += `?${urlParams}`;

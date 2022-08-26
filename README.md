@@ -1,20 +1,50 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
+
+NodeJS Wrapper for the Tik Tok Marketing API using node-fetch.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+
+TypeScript types are provided for arguments and outputs. As of `1.0.3` the only methods available are the following:
+
+### createAccessToken
+
+Uses the Tik Tok Developer App Id, App Secret, and OAuth code to create an Access Token on behalf of the user.
+
+example:
+
+```typescript
+const tiktokApi = new TikTokApi(null, true);
+const {
+  data: { access_token },
+} = await new TikTokAuth(tiktokApi).createAccessToken(
+  "<SECRET>",
+  "<APP_ID>",
+  code
+);
+```
+
+### getAuthorizedAdAccounts
+
+Uses the Tik Tok Developer App Id, App Secret, and Access Token to request all the Ad Accounts the token has access to.
+
+example:
+
+```typescript
+const tiktokApi = new TikTokApi("<ACCESS_TOKEN>", true);
+const {
+  data: { list },
+} = await new TikTokAuth(tiktokApi).getAuthorizedAdAccounts(
+  "<SECRET>",
+  "<APP_ID>"
+);
+```
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Run
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```shell
+npm run build
+```
+
+TODO: Automated Test Suite

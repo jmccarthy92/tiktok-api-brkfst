@@ -3,21 +3,27 @@ import TikTokApi from "./api";
 export default class TikTokObject {
   constructor(protected api: TikTokApi = TikTokApi.defaultApi) {}
 
-  public async post(
+  public async post<T = any>(
     endpoint: string,
     body: Record<string, any> = {},
     params: Record<string, any> = {}
-  ) {
+  ): Promise<T> {
     return this.api.call("POST", endpoint, body, params);
   }
 
-  public async formDataPost(endpoint: string, body: Record<string, any> = {}) {
+  public async formDataPost<T = any>(
+    endpoint: string,
+    body: Record<string, any> = {}
+  ): Promise<T> {
     const formData = new FormData();
     for (const key in body) formData.append(key, body[key]);
     return this.api.call("POST", endpoint, formData);
   }
 
-  public async get(endpoint: string, params: Record<string, any> = {}) {
+  public async get<T = any>(
+    endpoint: string,
+    params: Record<string, any> = {}
+  ): Promise<T> {
     return this.api.call("GET", endpoint, {}, params);
   }
 }
