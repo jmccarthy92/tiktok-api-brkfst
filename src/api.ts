@@ -1,3 +1,4 @@
+import FormData from "form-data";
 import fetch from "node-fetch";
 
 export default class TikTokApi {
@@ -21,7 +22,7 @@ export default class TikTokApi {
   public async call<T = any>(
     method: "POST" | "PUT" | "GET" | "PATCH" | "DELETE",
     path: string,
-    body: Record<string, any> = {},
+    body: Record<string, any> | FormData = {},
     params: Record<string, any> = {},
     headers: Record<string, any> = {
       "Content-Type": "application/json",
@@ -38,7 +39,7 @@ export default class TikTokApi {
       const response = await fetch(url, {
         method,
         headers,
-        body: Object.keys(body).length ? JSON.stringify(body) : undefined,
+        body: this.formatRequestBody(body),
       });
       const jsonResponse = await response.json();
       if (this.debug) this.logResponse(method, url, body, jsonResponse);
@@ -47,6 +48,13 @@ export default class TikTokApi {
       if (this.debug) this.logError(method, url, body, error);
       throw error;
     }
+  }
+
+  private formatRequestBody(body: Record<string, any> | FormData) {
+    let reqBody;
+    if (body instanceof FormData) reqBody = body;
+    else if (Object.keys(body).length) reqBody = JSON.stringify(body);
+    return reqBody;
   }
 
   private formatUrl(path: string, params: Record<string, any>): string {

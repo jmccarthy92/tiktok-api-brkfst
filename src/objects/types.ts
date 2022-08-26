@@ -19,3 +19,21 @@ export interface TikTokAccessTokenResponse {
   scope: number[];
   advertiser_ids: string[];
 }
+
+export interface UploadVideoRequest {
+  advertiser_id: string;
+  upload_type: UploadType;
+  video_file: string;
+  video_signature: string;
+  is_third_party?: boolean;
+  flaw_detect?: boolean;
+  auto_fix_enabled?: boolean;
+  auto_bind_enabled?: boolean;
+}
+
+export enum UploadType {
+  UPLOAD_BY_FILE = "UPLOAD_BY_FILE",
+  UPLOAD_BY_URL = "UPLOAD_BY_URL",
+  UPLOAD_BY_FILE_ID = "UPLOAD_BY_FILE_ID",
+  UPLOAD_BY_VIDEO_ID = "UPLOAD_BY_VIDEO_ID",
+}

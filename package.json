@@ -1,6 +1,6 @@
 {
   "name": "tiktok-api-brkfst",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Brkfst-made API for TikTok",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -33,6 +33,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "form-data": "^4.0.0",
     "node-fetch": "^2.6.7"
   }
 }
