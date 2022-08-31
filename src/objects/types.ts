@@ -41,6 +41,7 @@ export type UploadVideoFileRequest = Pick<
   | "flaw_detect"
   | "auto_bind_enabled"
   | "auto_fix_enabled"
+  | "file_name"
 >;
 
 export enum UploadType {
