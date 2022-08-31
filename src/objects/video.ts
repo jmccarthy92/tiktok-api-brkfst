@@ -1,5 +1,5 @@
 import { createHash } from "crypto";
-import { createReadStream, ReadStream } from "fs";
+import { createReadStream } from "fs";
 import TikTokObject from "../object";
 import {
   TikTokAuthorizedAccountResponse,
@@ -18,11 +18,11 @@ export default class TikTokVideo extends TikTokObject {
     filePath: string,
     request: UploadVideoFileRequest
   ): Promise<TikTokResponse<TikTokAuthorizedAccountResponse>> {
-    const { hash, stream } = await this.prepareFile(filePath);
+    const hash = await this.createFileHash(filePath);
     return this.uploadVideo({
       ...request,
       upload_type: UploadType.UPLOAD_BY_FILE,
-      video_file: stream,
+      video_file: createReadStream(filePath),
       video_signature: hash,
     });
   }
@@ -36,13 +36,7 @@ export default class TikTokVideo extends TikTokObject {
     );
   }
 
-  private prepareFile(
-    filePath: string,
-    algorithm = "md5"
-  ): Promise<{
-    hash: string;
-    stream: ReadStream;
-  }> {
+  private createFileHash(filePath: string, algorithm = "md5"): Promise<string> {
     // Algorithm depends on availability of OpenSSL on platform
     // Another algorithms: 'sha1', 'md5', 'sha256', 'sha512' ...
     return new Promise((resolve, reject) => {
@@ -55,7 +49,7 @@ export default class TikTokVideo extends TikTokObject {
         // making digest
         stream.on("end", function () {
           const hash = shasum.digest("hex");
-          return resolve({ hash, stream });
+          return resolve(hash);
         });
       } catch (error) {
         return reject("calc fail");

@@ -19,7 +19,13 @@ export default class TikTokObject {
   ): Promise<T> {
     const formData = new FormData();
     for (const key in body) formData.append(key, body[key]);
-    return this.api.call("POST", endpoint, formData, {}, headers);
+    return this.api.call(
+      "POST",
+      endpoint,
+      formData,
+      {},
+      { ...headers, ...formData.getHeaders() }
+    );
   }
 
   public async get<T = any>(

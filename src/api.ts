@@ -1,5 +1,5 @@
 import FormData from "form-data";
-import fetch from "node-fetch";
+import axios from "axios";
 
 export default class TikTokApi {
   static defaultApi: TikTokApi;
@@ -33,17 +33,16 @@ export default class TikTokApi {
       reqParams.access_token = this.accessToken;
       headers["Access-Token"] = this.accessToken;
     }
-
     const url = this.formatUrl(path, reqParams);
     try {
-      const response = await fetch(url, {
+      const response = await axios.request({
         method,
+        url,
         headers,
-        body: this.formatRequestBody(body),
+        data: this.formatRequestBody(body),
       });
-      const jsonResponse = await response.json();
-      if (this.debug) this.logResponse(method, url, body, jsonResponse);
-      return jsonResponse;
+      if (this.debug) this.logResponse(method, url, body, response.data);
+      return response.data;
     } catch (error) {
       if (this.debug) this.logError(method, url, body, error);
       throw error;
@@ -52,8 +51,9 @@ export default class TikTokApi {
 
   private formatRequestBody(body: Record<string, any> | FormData) {
     let reqBody;
-    if (body instanceof FormData) reqBody = body;
-    else if (Object.keys(body).length) reqBody = JSON.stringify(body);
+    if (body instanceof FormData) {
+      reqBody = body;
+    } else if (Object.keys(body).length) reqBody = JSON.stringify(body);
     return reqBody;
   }
 

@@ -25,7 +25,7 @@ export interface TikTokAccessTokenResponse {
 export interface UploadVideoRequest {
   advertiser_id: string;
   upload_type: UploadType;
-  video_file: string | ReadStream;
+  video_file: string | ReadStream | Buffer;
   video_signature: string;
   is_third_party?: boolean;
   flaw_detect?: boolean;

@@ -1,6 +1,6 @@
 # Introduction
 
-NodeJS Wrapper for the Tik Tok Marketing API using node-fetch.
+NodeJS Wrapper for the Tik Tok Marketing API using Axios.
 
 # Getting Started
 
@@ -49,6 +49,20 @@ const {
   "<SECRET>",
   "<APP_ID>"
 );
+```
+
+### uploadVideoByFile
+
+Uses the Tik Tok Video API to upload a file to Tik Tok Creatives library.
+
+example:
+
+```typescript
+const tiktokApi = new TikTokApi("<ACCESS_TOKEN>");
+const tiktokVideo = new TikTokVideo(tiktokApi); // or `new TikTokVideo()` if the API is already instantiated
+const { data } = await tiktokVideo.uploadVideoByFile("<FILE_PATH>", {
+  advertiser_id: "<ADVERTISER_ID>",
+});
 ```
 
 # Build and Test
