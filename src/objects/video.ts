@@ -2,7 +2,7 @@ import { createHash } from "crypto";
 import { createReadStream } from "fs";
 import TikTokObject from "../object";
 import {
-  TikTokAuthorizedAccountResponse,
+  TikTokVideoResponse,
   TikTokResponse,
   UploadType,
   UploadVideoFileRequest,
@@ -17,7 +17,7 @@ export default class TikTokVideo extends TikTokObject {
   public async uploadVideoByFile(
     filePath: string,
     request: UploadVideoFileRequest
-  ): Promise<TikTokResponse<TikTokAuthorizedAccountResponse>> {
+  ): Promise<TikTokResponse<TikTokVideoResponse>> {
     const hash = await this.createFileHash(filePath);
     return this.uploadVideo({
       ...request,
@@ -29,8 +29,8 @@ export default class TikTokVideo extends TikTokObject {
 
   public uploadVideo(
     request: UploadVideoRequest
-  ): Promise<TikTokResponse<TikTokAuthorizedAccountResponse>> {
-    return this.formDataPost<TikTokResponse<TikTokAuthorizedAccountResponse>>(
+  ): Promise<TikTokResponse<TikTokVideoResponse>> {
+    return this.formDataPost<TikTokResponse<TikTokVideoResponse>>(
       this.formatEndpoint("ad/upload"),
       request
     );

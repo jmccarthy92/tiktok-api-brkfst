@@ -11,6 +11,26 @@ export interface TikTokAuthorizedAccountResponse {
   list: TikTokAuthorizedAccountData[];
 }
 
+export interface TikTokVideoResponse {
+  id: string;
+  video_id: string;
+  video_cover_url: string;
+  format: string;
+  preview_url: string;
+  file_name: string;
+  displayable: boolean;
+  height: number;
+  width: number;
+  bit_rate: number;
+  create_time: string;
+  modify_time: string;
+  signature: string;
+  duration: number;
+  size: number;
+  fix_task_id: string;
+  flaw_types: string[];
+}
+
 export interface TikTokAuthorizedAccountData {
   advertiser_id: string;
   advertiser_name: string;
