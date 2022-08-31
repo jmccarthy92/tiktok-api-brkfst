@@ -40,6 +40,8 @@ export default class TikTokApi {
         url,
         headers,
         data: this.formatRequestBody(body),
+        maxBodyLength: Infinity,
+        maxContentLength: Infinity,
       });
       if (this.debug) this.logResponse(method, url, body, response.data);
       return response.data;

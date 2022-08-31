@@ -27,6 +27,7 @@ export interface UploadVideoRequest {
   upload_type: UploadType;
   video_file: string | ReadStream | Buffer;
   video_signature: string;
+  file_name?: string;
   is_third_party?: boolean;
   flaw_detect?: boolean;
   auto_fix_enabled?: boolean;
