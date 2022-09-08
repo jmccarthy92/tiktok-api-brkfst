@@ -28,16 +28,18 @@ export default class TikTokApi {
       "Content-Type": "application/json",
     }
   ): Promise<T> {
-    const reqParams = { ...params };
+    const reqParams = this.serializeParams(params);
     if (this.accessToken) {
       reqParams.access_token = this.accessToken;
       headers["Access-Token"] = this.accessToken;
     }
-    const url = this.formatUrl(path, reqParams);
+
+    const url = `${TikTokApi.API}/${path}/`;
     try {
       const response = await axios.request({
         method,
         url,
+        params: reqParams,
         headers,
         data: this.formatRequestBody(body),
         maxBodyLength: Infinity,
@@ -59,11 +61,14 @@ export default class TikTokApi {
     return reqBody;
   }
 
-  private formatUrl(path: string, params: Record<string, any>): string {
-    let url = `${TikTokApi.API}/${path}/`;
-    const urlParams = new URLSearchParams(params).toString();
-    if (urlParams) url += `?${urlParams}`;
-    return url;
+  private serializeParams(params: Record<string, any>): Record<string, any> {
+    const serializedParams: Record<string, any> = {};
+    for (const key in params) {
+      if (Array.isArray(params[key]))
+        serializedParams[key] = JSON.stringify(params[key]);
+      else serializedParams[key] = params[key];
+    }
+    return serializedParams;
   }
 
   private logResponse(
