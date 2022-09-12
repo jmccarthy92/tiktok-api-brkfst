@@ -4,7 +4,7 @@ NodeJS Wrapper for the Tik Tok Marketing API using Axios.
 
 # Getting Started
 
-TypeScript types are provided for arguments and outputs. As of `1.0.3` the only methods available are the following:
+TypeScript types are provided for arguments and outputs. As of `1.0.15` the only methods available are the following:
 
 ## Debug Mode
 
@@ -93,6 +93,54 @@ const { data } = await tiktokVideo.getBasicSyncReport({
     },
   ],
 });
+```
+
+## Campaign
+
+### getCampaigns
+
+Uses the [Tik Tok Campaign API](https://ads.tiktok.com/marketing_api/docs?id=1739315828649986) to retrieve Campaigns from Tik Tok API.
+
+```typescript
+const tiktokApi = new TikTokApi("<ACCESS_TOKEN>");
+const tiktokCampaign = new TikTokCampaign(tiktokApi); // or `new TikTokReport()` if the API is already instantiated
+const { data } = await tiktokCampaign.getCampaigns("<ADVERTISER_ID>", [
+  "campaign_id",
+  "campaign_name",
+  "advertiser_id",
+]);
+```
+
+## AdGroup
+
+### getAdGroups
+
+Uses the [Tik Tok AdGroup API](https://ads.tiktok.com/marketing_api/docs?id=1739314558673922) to retrieve Ad Groups from Tik Tok API.
+
+```typescript
+const tiktokApi = new TikTokApi("<ACCESS_TOKEN>");
+const tiktokAdGroup = new TikTokAdGroup(tiktokApi); // or `new TikTokReport()` if the API is already instantiated
+const { data } = await tiktokAdGroup.getAdGroups("<ADVERTISER_ID>", [
+  "adgroup_id",
+  "adgroup_name",
+  "advertiser_id",
+]);
+```
+
+## Ad
+
+### getAds
+
+Uses the [Tik Tok Ad API](https://ads.tiktok.com/marketing_api/docs?id=1735735588640770) to retrieve Ad from Tik Tok API.
+
+```typescript
+const tiktokApi = new TikTokApi("<ACCESS_TOKEN>");
+const tiktokVideo = new TikTokAd(tiktokApi); // or `new TikTokReport()` if the API is already instantiated
+const { data } = await tiktokVideo.getAds("<ADVERTISER_ID>", [
+  "ad_id",
+  "ad_name",
+  "advertiser_id",
+]);
 ```
 
 # Build and Test

@@ -355,8 +355,8 @@ export type BasicSyncReportRequest = Omit<
 export interface SyncReportRequest<
   D = Dimension,
   M = Metric,
-  FilterFieldName = string
-> {
+  FilterFieldName extends string = string
+> extends CommonRequestOptions {
   advertiser_id: string;
   report_type: ReportType;
   service_type?: ServiceType;
@@ -426,3 +426,226 @@ export enum UploadType {
   UPLOAD_BY_FILE_ID = "UPLOAD_BY_FILE_ID",
   UPLOAD_BY_VIDEO_ID = "UPLOAD_BY_VIDEO_ID",
 }
+
+export interface CommonRequestOptions<FilterFieldName extends string = string> {
+  filtering?: Filtering<FilterFieldName>[];
+  page?: number;
+  page_size?: number;
+}
+
+export const CAMPAIGN_FIELDS = [
+  "campaign_id",
+  "campaign_name",
+  "advertiser_id",
+  "budget",
+  "budget_mode",
+  "operation_status",
+  "objective",
+  "objective_type",
+  "create_time",
+  "modify_time",
+  "is_new_structure",
+  "campaign_app_profile_page_state",
+  "special_industries",
+  "secondary_status",
+] as const;
+type CampaignFieldTuple = typeof CAMPAIGN_FIELDS;
+export type CampaignField = CampaignFieldTuple[number];
+
+export type CampaignFilterField =
+  | "campaign_ids"
+  | "campaign_name"
+  | "campaign_type"
+  | "objective_type"
+  | "primary_status"
+  | "creation_filter_start_time"
+  | "creation_filter_end_time"
+  | "secondary_status";
+
+export const ADGROUP_FIELDS = [
+  "advertiser_id",
+  "campaign_id",
+  "adgroup_id",
+  "adgroup_name",
+  "split_test_group_id",
+  "split_test_status",
+  "share_disabled",
+  "placement_type",
+  "placements",
+  "inventory_filter_enabled",
+  "comment_disabled",
+  "app_id",
+  "promotion_type",
+  "store_id",
+  "store_authorized_bc_id",
+  "identity_id",
+  "identity_type",
+  "identity_authorized_bc_id",
+  "app_download_url",
+  "pixel_id",
+  "optimization_event",
+  "secondary_optimization_event",
+  "creative_material_mode",
+  "audience_ids",
+  "excluded_audience_ids",
+  "audience_rule",
+  "audience_type",
+  "location_ids",
+  "is_hfss",
+  "interest_category_ids",
+  "interest_keyword_ids",
+  "age_groups",
+  "gender",
+  "languages",
+  "operating_systems",
+  "network_types",
+  "device_price_ranges",
+  "min_android_version",
+  "min_ios_version",
+  "ios14_targeting",
+  "device_model_ids",
+  "household_income",
+  "budget_mode",
+  "budget",
+  "scheduled_budget",
+  "schedule_type",
+  "schedule_start_time",
+  "schedule_end_time",
+  "dayparting",
+  "optimization_goal",
+  "bid_display_mode",
+  "cpv_video_duration",
+  "conversion_window (deprecated)",
+  "pacing",
+  "billing_event",
+  "skip_learning_phase",
+  "bid_type",
+  "bid_price",
+  "conversion_bid_price",
+  "deep_bid_type",
+  "deep_cpa_bid",
+  "next_day_retention",
+  "secondary_status",
+  "operation_status",
+  "frequency",
+  "frequency_schedule",
+  "statistic_type",
+  "carrier_ids",
+  "video_download_disabled",
+  "blocked_pangle_app_ids",
+  "actions",
+  "action_period",
+  "video_user_actions",
+  "action_category_ids",
+  "action_scene",
+  "rf_purchased_type",
+  "purchased_impression",
+  "purchased_reach",
+  "rf_estimated_cpr",
+  "rf_estimated_frequency",
+  "included_pangle_audience_package_ids",
+  "excluded_pangle_audience_package_ids",
+  "is_new_structure",
+  "catalog_id",
+  "product_set_id",
+  "catalog_authorized_bc_id",
+  "included_custom_actions",
+  "excluded_custom_actions",
+  "shopping_ads_retargeting_type",
+  "brand_safety_type",
+  "brand_safety_partner",
+  "promotion_website_type",
+  "ios14_quota_type",
+  "roas_bid",
+  "auto_targeting_enabled",
+  "targeting_expansion",
+  "adgroup_app_profile_page_state",
+  "shopping_ads_type",
+  "product_source",
+] as const;
+type AdGroupFieldTuple = typeof ADGROUP_FIELDS;
+export type AdGroupField = AdGroupFieldTuple[number];
+
+export type AdGroupFilterField =
+  | "adgroup_name"
+  | "campaign_ids"
+  | "adgroup_ids"
+  | "objective_type"
+  | "creation_filter_start_time"
+  | "creation_filter_end_time"
+  | "billing_events"
+  | "primary_status"
+  | "secondary_status";
+
+export const AD_FIELDS = [
+  "advertiser_id",
+  "campaign_id",
+  "campaign_name",
+  "adgroup_id",
+  "adgroup_name",
+  "ad_id",
+  "ad_name",
+  "identity_id",
+  "identity_type",
+  "identity_authorized_bc_id",
+  "call_to_action",
+  "call_to_action_id",
+  "card_id",
+  "secondary_status",
+  "operation_status",
+  "is_aco",
+  "image_ids",
+  "ad_format",
+  "ad_text",
+  "ad_texts",
+  "video_id",
+  "tiktok_item_id",
+  "app_name",
+  "landing_page_url",
+  "landing_page_urls",
+  "display_name",
+  "profile_image_url",
+  "impression_tracking_url",
+  "click_tracking_url",
+  "deeplink",
+  "deeplink_type",
+  "fallback_type",
+  "playable_url",
+  "page_id",
+  "vast_moat_enabled",
+  "creative_authorized",
+  "is_new_structure",
+  "create_time",
+  "modify_time",
+  "shopping_ads_fallback_type",
+  "shopping_ads__deeplink_type",
+  "shopping_ads_video_package_id",
+  "promotional_music_disabled",
+  "dark_post_status",
+  "branded_content_disabled",
+  "item_duet_status",
+  "item_stitch_status",
+  "brand_safety_postbid_partner",
+  "product_specific_type",
+  "catalog_id",
+  "item_group_ids",
+  "product_set_id",
+  "sku_ids",
+  "dynamic_format",
+  "vertical_video_strategy",
+  "dynamic_destination",
+] as const;
+type AdFieldTuple = typeof AD_FIELDS;
+export type AdField = AdFieldTuple[number];
+
+export type AdFilterField =
+  | "campaign_ids"
+  | "adgroup_ids"
+  | "ad_text"
+  | "ad_ids"
+  | "objective_type"
+  | "creation_filter_start_time"
+  | "creation_filter_end_time"
+  | "billing_events"
+  | "primary_status"
+  | "secondary_status";
