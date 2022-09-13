@@ -730,3 +730,12 @@ export enum AdSecondaryStatus {
   AD_STATUS_DELIVERY_OK = "AD_STATUS_DELIVERY_OK",
   AD_STATUS_PROCESS_AUDIO = "AD_STATUS_PROCESS_AUDIO",
 }
+
+export interface CommonResponse<Field extends string = string> {
+  list: Record<Field, any>[];
+  page_info: PageInfo;
+}
+
+export type CampaignResponse = CommonResponse<CampaignField>;
+export type AdGroupResponse = CommonResponse<AdGroupField>;
+export type AdResponse = CommonResponse<AdField>;

@@ -2,8 +2,8 @@ import TikTokObject from "../object";
 import {
   CampaignField,
   CampaignFilterField,
+  CampaignResponse,
   CommonRequestOptions,
-  ReportResponse,
   TikTokResponse,
 } from "./types";
 
@@ -12,12 +12,12 @@ export default class TikTokCampaign extends TikTokObject {
     return "campaign";
   }
 
-  public async getCampaigns<Response = ReportResponse>(
+  public async getCampaigns(
     advertiserId: string,
     fields: CampaignField[],
     options: CommonRequestOptions<CampaignFilterField> = {}
-  ): Promise<TikTokResponse<Response>> {
-    return this.get<TikTokResponse<Response>>(
+  ): Promise<TikTokResponse<CampaignResponse>> {
+    return this.get<TikTokResponse<CampaignResponse>>(
       `${TikTokCampaign.ENDPOINT}/get`,
       {
         fields,

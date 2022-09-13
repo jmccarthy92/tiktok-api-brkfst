@@ -2,8 +2,8 @@ import TikTokObject from "../object";
 import {
   AdGroupField,
   AdGroupFilterField,
+  AdGroupResponse,
   CommonRequestOptions,
-  ReportResponse,
   TikTokResponse,
 } from "./types";
 
@@ -12,15 +12,18 @@ export default class TikTokAdGroup extends TikTokObject {
     return "adgroup";
   }
 
-  public async getAdGroups<Response = ReportResponse>(
+  public async getAdGroups(
     advertiserId: string,
     fields: AdGroupField[],
     options: CommonRequestOptions<AdGroupFilterField> = {}
-  ): Promise<TikTokResponse<Response>> {
-    return this.get<TikTokResponse<Response>>(`${TikTokAdGroup.ENDPOINT}/get`, {
-      fields,
-      advertiser_id: advertiserId,
-      ...options,
-    });
+  ): Promise<TikTokResponse<AdGroupResponse>> {
+    return this.get<TikTokResponse<AdGroupResponse>>(
+      `${TikTokAdGroup.ENDPOINT}/get`,
+      {
+        fields,
+        advertiser_id: advertiserId,
+        ...options,
+      }
+    );
   }
 }
