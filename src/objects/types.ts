@@ -356,7 +356,7 @@ export interface SyncReportRequest<
   D = Dimension,
   M = Metric,
   FilterFieldName extends string = string
-> extends CommonRequestOptions {
+> {
   advertiser_id: string;
   report_type: ReportType;
   service_type?: ServiceType;
@@ -428,7 +428,7 @@ export enum UploadType {
 }
 
 export interface CommonRequestOptions<FilterFieldName extends string = string> {
-  filtering?: Filtering<FilterFieldName>[];
+  filtering?: Record<FilterFieldName, string | string[]>;
   page?: number;
   page_size?: number;
 }

@@ -20,7 +20,7 @@ export default class TikTokAdGroup extends TikTokObject {
     return this.get<TikTokResponse<Response>>(`${TikTokAdGroup.ENDPOINT}/get`, {
       fields,
       advertiser_id: advertiserId,
-      ...this.serializeRequest(options),
+      ...options,
     });
   }
 }

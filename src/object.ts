@@ -35,25 +35,4 @@ export default class TikTokObject {
   ): Promise<T> {
     return this.api.call("GET", endpoint, {}, params);
   }
-
-  protected serializeRequest<
-    R extends CommonRequestOptions = CommonRequestOptions
-  >(request: R): R {
-    const { filtering } = request;
-    if (filtering) {
-      const hasArrayFilter = filtering.some(({ filter_value }) =>
-        Array.isArray(filter_value)
-      );
-      if (hasArrayFilter) {
-        return {
-          ...request,
-          filtering: filtering.map((filter) => ({
-            ...filter,
-            filter_value: JSON.stringify(filter.filter_value),
-          })),
-        };
-      }
-    }
-    return request;
-  }
 }

@@ -29,4 +29,23 @@ export default class TikTokReport extends TikTokObject {
       this.serializeRequest(request)
     );
   }
+
+  private serializeRequest(request: SyncReportRequest): SyncReportRequest {
+    const { filtering } = request;
+    if (filtering) {
+      const hasArrayFilter = filtering.some(({ filter_value }) =>
+        Array.isArray(filter_value)
+      );
+      if (hasArrayFilter) {
+        return {
+          ...request,
+          filtering: filtering.map((filter) => ({
+            ...filter,
+            filter_value: JSON.stringify(filter.filter_value),
+          })),
+        };
+      }
+    }
+    return request;
+  }
 }

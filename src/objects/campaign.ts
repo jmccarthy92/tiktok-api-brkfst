@@ -22,7 +22,7 @@ export default class TikTokCampaign extends TikTokObject {
       {
         fields,
         advertiser_id: advertiserId,
-        ...this.serializeRequest(options),
+        ...options,
       }
     );
   }
