@@ -428,7 +428,7 @@ export enum UploadType {
 }
 
 export interface CommonRequestOptions<FilterFieldName extends string = string> {
-  filtering?: Record<FilterFieldName, string | string[]>;
+  filtering?: Record<FilterFieldName | string, string | string[]>;
   page?: number;
   page_size?: number;
 }
