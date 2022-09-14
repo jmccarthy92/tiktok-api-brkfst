@@ -143,6 +143,21 @@ const { data } = await tiktokVideo.getAds("<ADVERTISER_ID>", [
 ]);
 ```
 
+## Ad Account
+
+### getAdAccountDetails
+
+Uses the [Tik Tok Ad Account API](https://ads.tiktok.com/marketing_api/docs?id=1739593083610113) to retrieve Ad Accounts from Tik Tok API.
+
+```typescript
+const tiktokApi = new TikTokApi("<ACCESS_TOKEN>");
+const tiktokVideo = new TikTokAdAccount(tiktokApi); // or `new TikTokReport()` if the API is already instantiated
+const { data } = await tiktokVideo.getAdDetails(
+  ["<ADVERTISER_ID>"],
+  ["status", "name"]
+);
+```
+
 # Build and Test
 
 Run

@@ -739,3 +739,31 @@ export interface CommonResponse<Field extends string = string> {
 export type CampaignResponse = CommonResponse<CampaignField>;
 export type AdGroupResponse = CommonResponse<AdGroupField>;
 export type AdResponse = CommonResponse<AdField>;
+
+export const AD_ACCOUNT_FIELDS = [
+  "telephone_number",
+  "contacter",
+  "currency",
+  "cellphone_number",
+  "timezone",
+  "advertiser_id",
+  "role",
+  "company",
+  "status",
+  "description",
+  "rejection_reason",
+  "address",
+  "name",
+  "language",
+  "industry",
+  "license_no",
+  "email",
+  "license_url",
+  "country",
+  "balance",
+  "create_time",
+  "display_timezone",
+  "owner_bc_id",
+] as const;
+type AdAccountFieldTuple = typeof AD_ACCOUNT_FIELDS;
+export type AdAccountField = AdAccountFieldTuple[number];
