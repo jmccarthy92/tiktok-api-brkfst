@@ -1,5 +1,5 @@
 import TikTokObject from "../object";
-import { AdResponse, TikTokResponse, AdAccountField } from "./types";
+import { AdAccountResponse, TikTokResponse, AdAccountField } from "./types";
 
 export default class TikTokAdAccount extends TikTokObject {
   static get ENDPOINT() {
@@ -9,8 +9,8 @@ export default class TikTokAdAccount extends TikTokObject {
   public async getAdAccountDetails(
     advertiserId: string[],
     fields: AdAccountField[]
-  ): Promise<TikTokResponse<AdResponse>> {
-    return this.get<TikTokResponse<AdResponse>>(
+  ): Promise<TikTokResponse<AdAccountResponse>> {
+    return this.get<TikTokResponse<AdAccountResponse>>(
       `${TikTokAdAccount.ENDPOINT}/info`,
       {
         fields,

@@ -731,6 +731,22 @@ export enum AdSecondaryStatus {
   AD_STATUS_PROCESS_AUDIO = "AD_STATUS_PROCESS_AUDIO",
 }
 
+export enum AdAccountStatus {
+  STATUS_DISABLE = "STATUS_DISABLE",
+  STATUS_PENDING_CONFIRM = "STATUS_PENDING_CONFIRM",
+  STATUS_PENDING_VERIFIED = "STATUS_PENDING_VERIFIED",
+  STATUS_CONFIRM_FAIL = "STATUS_CONFIRM_FAIL",
+  STATUS_ENABLE = "STATUS_ENABLE",
+  STATUS_CONFIRM_FAIL_END = "STATUS_CONFIRM_FAIL_END",
+  STATUS_PENDING_CONFIRM_MODIFY = "STATUS_PENDING_CONFIRM_MODIFY",
+  STATUS_CONFIRM_MODIFY_FAIL = "STATUS_CONFIRM_MODIFY_FAIL",
+  STATUS_LIMIT = "STATUS_LIMIT",
+  STATUS_WAIT_FOR_BPM_AUDIT = "STATUS_WAIT_FOR_BPM_AUDIT",
+  STATUS_WAIT_FOR_PUBLIC_AUTH = "STATUS_WAIT_FOR_PUBLIC_AUTH",
+  STATUS_SELF_SERVICE_UNAUDITED = "STATUS_SELF_SERVICE_UNAUDITED",
+  STATUS_CONTRACT_PENDING = "STATUS_CONTRACT_PENDING",
+}
+
 export interface CommonResponse<Field extends string = string> {
   list: Record<Field, any>[];
   page_info: PageInfo;
@@ -739,6 +755,7 @@ export interface CommonResponse<Field extends string = string> {
 export type CampaignResponse = CommonResponse<CampaignField>;
 export type AdGroupResponse = CommonResponse<AdGroupField>;
 export type AdResponse = CommonResponse<AdField>;
+export type AdAccountResponse = CommonResponse<AdAccountField>;
 
 export const AD_ACCOUNT_FIELDS = [
   "telephone_number",
