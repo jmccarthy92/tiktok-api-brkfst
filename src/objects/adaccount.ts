@@ -7,14 +7,14 @@ export default class TikTokAdAccount extends TikTokObject {
   }
 
   public async getAdAccountDetails(
-    advertiserId: string[],
+    advertiserIds: string[],
     fields: AdAccountField[]
   ): Promise<TikTokResponse<AdAccountResponse>> {
     return this.get<TikTokResponse<AdAccountResponse>>(
       `${TikTokAdAccount.ENDPOINT}/info`,
       {
         fields,
-        advertiser_id: advertiserId,
+        advertiser_ids: advertiserIds,
       }
     );
   }
