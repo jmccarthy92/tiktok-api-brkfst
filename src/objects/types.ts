@@ -321,7 +321,7 @@ export const ONSITE_EVENT_METRICS = [
 type OnsiteEventMetricTuple = typeof ONSITE_EVENT_METRICS;
 export type OnsiteEventMetric = OnsiteEventMetricTuple[number];
 
-export const BASIC_METRICS = Object.freeze(
+export const BASIC_METRICS: Readonly<BasicMetric[]> = Object.freeze(
   ATTRIBUTE_METRICS.concat(
     BASIC_DATA_METRICS,
     VIDEO_PLAY_METRICS,
@@ -784,3 +784,12 @@ export const AD_ACCOUNT_FIELDS = [
 ] as const;
 type AdAccountFieldTuple = typeof AD_ACCOUNT_FIELDS;
 export type AdAccountField = AdAccountFieldTuple[number];
+
+const record: Partial<Record<BasicMetric, BasicMetric>> = {};
+export const TikTokReportField: Partial<Record<BasicMetric, BasicMetric>> =
+  Object.freeze(
+    BASIC_METRICS.reduce((acc, field) => {
+      acc[field] = field;
+      return acc;
+    }, record)
+  );
