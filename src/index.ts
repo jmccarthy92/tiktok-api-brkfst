@@ -7,3 +7,4 @@ export { default as TikTokAdGroup } from "./objects/adgroup";
 export { default as TikTokAd } from "./objects/ad";
 export { default as TikTokAdAccount } from "./objects/adaccount";
 export * from "./objects/types";
+export * from "./constants";

@@ -1,5 +1,7 @@
 import FormData from "form-data";
 import axios from "axios";
+import { SUCCESS_CODES } from "./constants";
+import { TikTokError } from "error";
 
 export default class TikTokApi {
   static defaultApi: TikTokApi;
@@ -46,7 +48,9 @@ export default class TikTokApi {
         maxContentLength: Infinity,
       });
       if (this.debug) this.logResponse(method, url, body, response.data);
-      return response.data;
+
+      if (SUCCESS_CODES.includes(response.data.code)) return response.data;
+      else throw new TikTokError(response.data, method, url);
     } catch (error) {
       if (this.debug) this.logError(method, url, body, error);
       throw error;

@@ -786,10 +786,11 @@ type AdAccountFieldTuple = typeof AD_ACCOUNT_FIELDS;
 export type AdAccountField = AdAccountFieldTuple[number];
 
 const record: Partial<Record<BasicMetric, BasicMetric>> = {};
-export const TikTokReportField: Partial<Record<BasicMetric, BasicMetric>> =
-  Object.freeze(
-    BASIC_METRICS.reduce((acc, field) => {
-      acc[field] = field;
-      return acc;
-    }, record)
-  );
+export const TikTokReportField: Readonly<
+  Partial<Record<BasicMetric, BasicMetric>>
+> = Object.freeze(
+  BASIC_METRICS.reduce((acc, field) => {
+    acc[field] = field;
+    return acc;
+  }, record)
+);
