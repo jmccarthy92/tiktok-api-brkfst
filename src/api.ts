@@ -1,7 +1,7 @@
 import FormData from "form-data";
 import axios from "axios";
 import { SUCCESS_CODES } from "./constants";
-import { TikTokError } from "error";
+import { TikTokError } from "./error";
 
 export default class TikTokApi {
   static defaultApi: TikTokApi;
