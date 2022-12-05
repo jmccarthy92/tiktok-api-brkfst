@@ -5,30 +5,30 @@ import {
   TikTokVideoResponse,
   TikTokResponse,
   UploadType,
-  UploadVideoFileRequest,
-  UploadVideoRequest,
+  UploadImageRequest,
+  UploadImageFileRequest,
 } from "./types";
 
-export default class TikTokVideo extends TikTokObject {
+export default class TikTokImage extends TikTokObject {
   static get ENDPOINT() {
-    return "file/video";
+    return "file/image";
   }
 
-  public async uploadVideoByFile(
+  public async uploadImageByFile(
     filePath: string,
-    request: UploadVideoFileRequest
+    request: UploadImageFileRequest
   ): Promise<TikTokResponse<TikTokVideoResponse>> {
     const hash = await createFileHash(filePath);
-    return this.uploadVideo({
+    return this.uploadImage({
       ...request,
       upload_type: UploadType.UPLOAD_BY_FILE,
-      video_file: createReadStream(filePath),
-      video_signature: hash,
+      image_file: createReadStream(filePath),
+      image_signature: hash,
     });
   }
 
-  public uploadVideo(
-    request: UploadVideoRequest
+  public uploadImage(
+    request: UploadImageRequest
   ): Promise<TikTokResponse<TikTokVideoResponse>> {
     return this.formDataPost<TikTokResponse<TikTokVideoResponse>>(
       this.formatEndpoint("ad/upload"),
@@ -37,6 +37,6 @@ export default class TikTokVideo extends TikTokObject {
   }
 
   private formatEndpoint(endpoint: string): string {
-    return `${TikTokVideo.ENDPOINT}/${endpoint}`;
+    return `${TikTokImage.ENDPOINT}/${endpoint}`;
   }
 }

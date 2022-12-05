@@ -410,6 +410,14 @@ export interface UploadVideoRequest {
   auto_bind_enabled?: boolean;
 }
 
+export interface UploadImageRequest {
+  advertiser_id: string;
+  upload_type: UploadType;
+  image_file: string | ReadStream | Buffer;
+  image_signature: string;
+  file_name?: string;
+}
+
 export type UploadVideoFileRequest = Pick<
   UploadVideoRequest,
   | "advertiser_id"
@@ -418,6 +426,11 @@ export type UploadVideoFileRequest = Pick<
   | "auto_bind_enabled"
   | "auto_fix_enabled"
   | "file_name"
+>;
+
+export type UploadImageFileRequest = Pick<
+  UploadImageRequest,
+  "advertiser_id" | "file_name"
 >;
 
 export enum UploadType {
