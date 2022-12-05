@@ -31,6 +31,22 @@ export interface TikTokVideoResponse {
   flaw_types: string[];
 }
 
+export interface TikTokImageResponse {
+  id: string;
+  image_id: string;
+  image_url: string;
+  format: string;
+  file_name: string;
+  material_id: number;
+  displayable: boolean;
+  height: number;
+  width: number;
+  create_time: string;
+  modify_time: string;
+  signature: string;
+  size: number;
+}
+
 export interface TikTokAuthorizedAccountData {
   advertiser_id: string;
   advertiser_name: string;

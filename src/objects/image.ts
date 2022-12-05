@@ -2,11 +2,11 @@ import { createReadStream } from "fs";
 import { createFileHash } from "../utils";
 import TikTokObject from "../object";
 import {
-  TikTokVideoResponse,
   TikTokResponse,
   UploadType,
   UploadImageRequest,
   UploadImageFileRequest,
+  TikTokImageResponse,
 } from "./types";
 
 export default class TikTokImage extends TikTokObject {
@@ -17,7 +17,7 @@ export default class TikTokImage extends TikTokObject {
   public async uploadImageByFile(
     filePath: string,
     request: UploadImageFileRequest
-  ): Promise<TikTokResponse<TikTokVideoResponse>> {
+  ): Promise<TikTokResponse<TikTokImageResponse>> {
     const hash = await createFileHash(filePath);
     return this.uploadImage({
       ...request,
@@ -29,8 +29,8 @@ export default class TikTokImage extends TikTokObject {
 
   public uploadImage(
     request: UploadImageRequest
-  ): Promise<TikTokResponse<TikTokVideoResponse>> {
-    return this.formDataPost<TikTokResponse<TikTokVideoResponse>>(
+  ): Promise<TikTokResponse<TikTokImageResponse>> {
+    return this.formDataPost<TikTokResponse<TikTokImageResponse>>(
       this.formatEndpoint("ad/upload"),
       request
     );
